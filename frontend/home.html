@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFINITE STORE - Your Premium Shopping Destination</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a00e0;
+            --secondary-color: #8e2de2;
+            --accent-color: #ff6b6b;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            background-color: #f5f5f5;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        
+        .cart-btn {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://res.cloudinary.com/djsltsclo/image/upload/v1750608960/photo-1555529669-e69e7aa0ba9a_jvazwg.jpg");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .category-card h3 {
+            font-weight: 600;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+        }
+        
+        .buy-now {
+            width: 100%;
+            margin-top: 0.5rem;
+            background-color: var(--accent-color);
+            border: none;
+        }
+        
+        .buy-now:hover {
+            background-color: #ff5252;
+        }
+        
+        .modal-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-btn {
+            background-color: #e9ecef;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+        }
+        
+        .quantity {
+            width: 40px;
+            text-align: center;
+        }
+        
+        .remove-item {
+            color: var(--accent-color);
+            background: none;
+            border: none;
+            margin-left: 10px;
+        }
+        
+        .cart-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .total-amount {
+            color: var(--primary-color);
+        }
+        
+        .checkout-btn {
+            width: 100%;
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        .footer h4 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .newsletter-form input {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .newsletter-form button {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 500;
+        }
+        
+        /* Payment Modal */
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            flex: 1 0 30%;
+            min-width: 100px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            background-color: #f8f9fa;
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 0, 224, 0.05);
+        }
+        
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .payment-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .category-card {
+                padding: 1.5rem;
+            }
+            
+            .payment-method {
+                flex: 1 0 45%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-infinity me-2"></i>INFINITE STORE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#deals">Deals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link cart-btn" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Discover Endless Possibilities</h1>
+                <p>Premium products at unbeatable prices with fast delivery</p>
+                <a href="#products" class="btn btn-primary btn-lg">Shop Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Categories -->
+    <section class="categories-section py-5" id="products">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="category-card" data-category="electronics">
+                        <i class="fas fa-laptop"></i>
+                        <h3>Electronics</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card" data-category="home-appliances">
+                        <i class="fas fa-home"></i>
+                        <h3>Home Appliances</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card" data-category="fashion">
+                        <i class="fas fa-tshirt"></i>
+                        <h3>Fashion</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section py-5 bg-light">
+        <div class="container">
+            <div class="product-category active" id="electronics">
+                <h3 class="category-title">Electronics</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750598746/laptop_tvlojh.png" alt="Laptop" class="product-img">
+                            <div class="product-info">
+                                <h4>Premium Laptop</h4>
+                                <p class="price">$899.99</p>
+                                <button  class="btn btn-primary add-to-cart" data-product="Premium Laptop" data-price="899.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Premium Laptop" data-price="899.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750598746/mobiles_pytrgv.png" alt="Smartphone" class="product-img">
+                            <div class="product-info">
+                                <h4>Smartphone Pro</h4>
+                                <p class="price">$699.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Smartphone Pro" data-price="699.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Smartphone Pro" data-price="699.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750598746/headphone_nmwwxe.png" alt="Headphones" class="product-img">
+                            <div class="product-info">
+                                <h4>Wireless Headphones</h4>
+                                <p class="price">$199.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Wireless Headphones" data-price="199.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Wireless Headphones" data-price="199.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-category" id="home-appliances" style="display: none;">
+                <h3 class="category-title">Home Appliances</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750609649/photo-1601944179066-29786cb9d32a_il65th.jpg" alt="Smart TV" class="product-img">
+                            <div class="product-info">
+                                <h4>Smart TV 55"</h4>
+                                <p class="price">$749.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Smart TV 55" data-price="749.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Smart TV 55" data-price="749.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750609710/premium_photo-1729431432431-fabe5caa7078_kb4n92.jpg" alt="Refrigerator" class="product-img">
+                            <div class="product-info">
+                                <h4>Smart Refrigerator</h4>
+                                <p class="price">$1299.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Smart Refrigerator" data-price="1299.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Smart Refrigerator" data-price="1299.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750609837/premium_photo-1675937428916-535f85f41c61_zswfas.jpg" alt="Washing Machine" class="product-img">
+                            <div class="product-info">
+                                <h4>Washing Machine</h4>
+                                <p class="price">$599.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Washing Machine" data-price="599.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Washing Machine" data-price="599.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-category" id="fashion" style="display: none;">
+                <h3 class="category-title">Fashion</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750609946/photo-1551028719-00167b16eac5_mpf5up.jpg" alt="Men's Jacket" class="product-img">
+                            <div class="product-info">
+                                <h4>Men's Leather Jacket</h4>
+                                <p class="price">$149.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Men's Leather Jacket" data-price="149.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Men's Leather Jacket" data-price="149.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750610007/photo-1542272604-787c3835535d_kfvbbd.jpg" alt="Jeans" class="product-img">
+                            <div class="product-info">
+                                <h4>Jeans</h4>
+                                <p class="price">$59.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Women's Summer Dress" data-price="59.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Women's Summer Dress" data-price="59.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750610068/photo-1600185365483-26d7a4cc7519_rcb6ku.jpg" alt="Running Shoes" class="product-img">
+                            <div class="product-info">
+                                <h4>Running Shoes</h4>
+                                <p class="price">$89.99</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Running Shoes" data-price="89.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Running Shoes" data-price="89.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deals Section -->
+    <section class="deals-section py-5" id="deals">
+        <div class="container">
+            <h2 class="section-title">Hot Deals</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="deal-card p-4 bg-white rounded-3 shadow-sm">
+                        <div class="row align-items-center">
+                            <div class="col-md-5">
+                                <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750610135/photo-1517336714731-489689fd1ca8_mpgwuh.jpg" alt="Deal Product" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="deal-badge bg-danger text-white d-inline-block px-2 py-1 rounded mb-2">30% OFF</div>
+                                <h4>MacBook Pro 2023</h4>
+                                <div class="d-flex align-items-center mb-2">
+                                    <p class="price text-danger me-2 mb-0">$1399.99</p>
+                                    <p class="original-price text-muted mb-0"><del>$1999.99</del></p>
+                                </div>
+                                <p class="text-muted small">Limited time offer. Ends in 2 days.</p>
+                                <button class="btn btn-primary add-to-cart" data-product="MacBook Pro 2023 (Deal)" data-price="1399.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="MacBook Pro 2023 (Deal)" data-price="1399.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="deal-card p-4 bg-white rounded-3 shadow-sm">
+                        <div class="row align-items-center">
+                            <div class="col-md-5">
+                                <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750610209/photo-1523275335684-37898b6baf30_feq9yh.jpg" alt="Deal Product" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="deal-badge bg-danger text-white d-inline-block px-2 py-1 rounded mb-2">25% OFF</div>
+                                <h4>Smart Watch Pro</h4>
+                                <div class="d-flex align-items-center mb-2">
+                                    <p class="price text-danger me-2 mb-0">$224.99</p>
+                                    <p class="original-price text-muted mb-0"><del>$299.99</del></p>
+                                </div>
+                                <p class="text-muted small">Limited stock available.</p>
+                                <button class="btn btn-primary add-to-cart" data-product="Smart Watch Pro (Deal)" data-price="224.99">Add to Cart</button>
+                                <button class="btn buy-now" data-product="Smart Watch Pro (Deal)" data-price="224.99" onclick="window.location.href='payment.html'">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section py-5 bg-light" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="section-title text-start mb-4">About Infinite Store</h2>
+                    <p>Welcome to Infinite Store, your premier destination for high-quality products at competitive prices. Founded in 2020, we've grown from a small startup to one of the most trusted online retailers in the region.</p>
+                    <p>Our mission is to provide customers with an endless selection of premium products, exceptional customer service, and a seamless shopping experience from the comfort of your home.</p>
+                    <div class="d-flex mt-4">
+                        <div class="me-4">
+                            <h3 class="text-primary">10K+</h3>
+                            <p>Happy Customers</p>
+                        </div>
+                        <div class="me-4">
+                            <h3 class="text-primary">500+</h3>
+                            <p>Premium Products</p>
+                        </div>
+                        <div>
+                            <h3 class="text-primary">24/7</h3>
+                            <p>Customer Support</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://res.cloudinary.com/djsltsclo/image/upload/v1750610286/photo-1556740738-b6a63e27c4df_eniwhz.jpg" alt="Our Store" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="cart-empty text-center py-4" style="display: none;">
+                        <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
+                        <h4>Your cart is empty</h4>
+                        <p>Start shopping to add items to your cart</p>
+                        <button class="btn btn-primary" data-bs-dismiss="modal">Continue Shopping</button>
+                    </div>
+                    <div class="cart-items-container">
+                        <ul class="cart-items list-group">
+                            <!-- Cart items will be added here dynamically -->
+                        </ul>
+                        <div class="cart-total mt-3 p-3 bg-light rounded">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Total:</h5>
+                                <h5 class="mb-0 total-amount">$0.00</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    <button onclick="window.location.href='payment.html'" type="button" class="btn btn-primary checkout-btn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Complete Your Purchase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                      <div class="order-summary mt-4 p-3 bg-light rounded">
+                        <h6>Order Summary</h6>
+                        <div class="d-flex justify-content-between">
+                            <span>Subtotal:</span>
+                            <span class="order-subtotal">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Shipping:</span>
+                            <span>$5.99</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Tax:</span>
+                            <span class="order-tax">$0.00</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total:</span>
+                            <span class="order-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" window.location.href="payment.html" class="btn btn-primary confirm-payment">Confirm Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="checkmark-circle">
+                        <div class="checkmark">
+                            <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+                        </div>
+                    </div>
+                    <h3 class="mt-4 mb-3">Order Confirmed!</h3>
+                    <p class="text-muted">Thank you for your purchase. Your order has been placed successfully.</p>
+                    <p class="text-muted">Order ID: <strong>#ORD-<span id="order-id">123456</span></strong></p>
+                    <button type="button" class="btn btn-primary mt-3" data-bs-dismiss="modal">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4><i class="fas fa-infinity me-2"></i>INFINITE STORE</h4>
+                    <p>Your one-stop shop for premium products and exceptional service.</p>
+                    <div class="social-icons mt-3">
+                        
+    <script src="cart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
