@@ -6,7 +6,7 @@ This project is a full-stack e-commerce web application built as part of a cloud
 
 ## 🌍 Live URLs:
 
-* **Frontend (Netlify):** [https://comfy-peony-b9f9ef.netlify.app](https://comfy-peony-b9f9ef.netlify.app)
+* **Frontend (Netlify):** [https://infinitestore.netlify.app](https://infinitestore.netlify.app)
 * **Backend (Render):** [https://infinity-backend-eopv.onrender.com](https://infinity-backend-eopv.onrender.com)
 
 ---
